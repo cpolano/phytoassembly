@@ -38,4 +38,4 @@ The sam file is passed to `phytofilter.pl` again, producing mapping and non-mapp
 The results are saved in a csv file (`Stage3.$cutoffval.contigs.csv`), which is then filtered according to the identity percentage (I.P.): entries with an I.P. greater than 95% are attributed to the plant (`Stage3.$cutoffval.contigs.plant.csv`), while those with a lower I.P. are attributed to the phytoplasma (`Stage3.$cutoffval.contigs.phyto.csv`).  
 The IDs saved in the last csv file are used to extract the phytoplasma sequences from the query and saved in a fasta file (`Stage3.$cutoffval.contigs.phyto.fasta`).
 
-8. Lastly, all the outputs (Diseased.*, Healthy.*, Stage3.*) are moved to folders with a timestamp (e.g. `PhytoFiles_<cutoff>_<date>`) and compressed in the tbz2 format.
+8. Lastly, all the outputs (Diseased.\*, Healthy.\*, Stage3.\*) are moved to folders with a timestamp (e.g. `PhytoFiles_<cutoff>_<date>`) and compressed in the tbz2 format.

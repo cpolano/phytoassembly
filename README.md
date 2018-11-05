@@ -29,13 +29,13 @@ The following steps are run once with no cutoff, then using an optimized cutoff 
 
 4. The sam file is passed to a second perl procedure (`phytofilter.pl`) that extracts and exports both mapping and non-mapping sequences to fasta and fastq files (`Stage1.$cutoffval.nonmatch.fasta/q`, `Stage1.$cutoffval.match.fasta/q`), according to the sam flag #4, (“the query sequence itself is unmapped”).
 
-5. The mapping reads (`Stage1.$cutoffval.match.fastq`) are then aligned with bwa mem against the healthy assembly (`Healthy.contigs.fasta`) and saved in the sam format (`Stage2.$cutoffval.match.sam`).
+5. The mapping reads (`Stage1.$cutoffval.match.fastq`) are then aligned with bwa mem against the healthy assembly (`Healthy.contigs.fasta`) and saved in the sam format (`Stage2.$cutoffval.match.sam`).  
 The sam file is passed to `phytofilter.pl` again, producing mapping and non-mapping fasta and fastq files (`Stage2.$cutoffval.match.fasta/q` and `Stage2.$cutoffval.nonmatch.fasta/q`).
 
 6. The non-mapping sequences are assembled with the A5 pipeline, to obtain the non-mapping contigs list (`Stage3.$cutoffval.contigs.fasta`).
 
-7. A third perl procedure (`phytoblast.pl`) creates a blast nucleotide database from the reference genome contigs file (`Healthy.contigs.fasta`) and queries it with tblastx (translated nucleotide query vs. translated nucleotide database blast) using the non-mapping sequences (`Stage3.$cutoffval.contigs.fasta`).
-The results are saved in a csv file (`Stage3.$cutoffval.contigs.csv`), which is then filtered according to the identity percentage (I.P.): entries with an I.P. greater than 95% are attributed to the plant (`Stage3.$cutoffval.contigs.plant.csv`), while those with a lower I.P. are attributed to the phytoplasma (`Stage3.$cutoffval.contigs.phyto.csv`).
+7. A third perl procedure (`phytoblast.pl`) creates a blast nucleotide database from the reference genome contigs file (`Healthy.contigs.fasta`) and queries it with tblastx (translated nucleotide query vs. translated nucleotide database blast) using the non-mapping sequences (`Stage3.$cutoffval.contigs.fasta`).  
+The results are saved in a csv file (`Stage3.$cutoffval.contigs.csv`), which is then filtered according to the identity percentage (I.P.): entries with an I.P. greater than 95% are attributed to the plant (`Stage3.$cutoffval.contigs.plant.csv`), while those with a lower I.P. are attributed to the phytoplasma (`Stage3.$cutoffval.contigs.phyto.csv`).  
 The IDs saved in the last csv file are used to extract the phytoplasma sequences from the query and saved in a fasta file (`Stage3.$cutoffval.contigs.phyto.fasta`).
 
 8. Lastly, all the outputs (Diseased.*, Healthy.*, Stage3.*) are moved to folders with a timestamp (e.g. `PhytoFiles_<cutoff>_<date>`) and compressed in the tbz2 format.
